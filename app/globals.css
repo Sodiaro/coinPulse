@@ -1022,6 +1022,32 @@
       h4 {
         @apply text-xl md:text-2xl font-semibold mb-2;
       }
+
+      .no-trades {
+        @apply mt-5 rounded-xl bg-dark-500 px-5 py-8 text-center text-sm text-purple-100/60;
+      }
+
+      .trades-wrapper {
+        @apply relative;
+
+        &.is-collapsed::after {
+          content: "";
+          @apply pointer-events-none absolute inset-x-0 bottom-0 h-14 rounded-b-xl;
+          background: linear-gradient(to bottom, transparent, var(--dark-500));
+        }
+      }
+
+      .trades-toggle {
+        @apply mx-auto mt-4 flex items-center gap-1.5 rounded-full border border-dark-400 bg-dark-500 px-5 py-2.5 text-sm font-medium text-purple-100 transition-colors cursor-pointer hover:border-purple-100/30 hover:text-white;
+
+        .chevron {
+          @apply transition-transform duration-200;
+        }
+
+        .chevron.is-open {
+          @apply rotate-180;
+        }
+      }
     }
 
     .trades-table {

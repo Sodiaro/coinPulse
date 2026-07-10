@@ -4,9 +4,13 @@ import { Separator } from "@/components/ui/separator";
 import CandlestickChart from "@/components/CandlestickChart";
 import { useCoinGeckoWebSocket } from "@/hooks/useCoinGeckoWebSocket";
 import DataTable from "@/components/DataTable";
-import { formatCurrency, timeAgo } from "@/lib/utils";
-import { useState } from "react";
+import { cn, formatCurrency, timeAgo } from "@/lib/utils";
+import { getPoolTrades } from "@/lib/coingecko.actions";
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import CoinHeader from "@/components/CoinHeader";
+
+const COLLAPSED_TRADES = 5;
 
 const LiveDataWrapper = ({
 	children,
@@ -21,6 +25,37 @@ const LiveDataWrapper = ({
 		poolId,
 		liveInterval,
 	});
+
+	// The live trades WebSocket is a paid feature, so poll the onchain REST
+	// endpoint for recent pool trades instead. WebSocket trades win when present.
+	const [restTrades, setRestTrades] = useState<Trade[]>([]);
+
+	useEffect(() => {
+		if (!poolId) return;
+
+		let active = true;
+		const load = async () => {
+			const data = await getPoolTrades(poolId);
+			if (active) setRestTrades(data);
+		};
+
+		load();
+		const id = setInterval(load, 12000);
+
+		return () => {
+			active = false;
+			clearInterval(id);
+		};
+	}, [poolId]);
+
+	const recentTrades = trades.length > 0 ? trades : restTrades;
+
+	const [showAllTrades, setShowAllTrades] = useState(false);
+	const hasMoreTrades = recentTrades.length > COLLAPSED_TRADES;
+	const visibleTrades =
+		showAllTrades || !hasMoreTrades
+			? recentTrades
+			: recentTrades.slice(0, COLLAPSED_TRADES);
 
 	const tradeColumns: DataTableColumn<Trade>[] = [
 		{
@@ -89,16 +124,45 @@ const LiveDataWrapper = ({
 
 			<Separator className="divider" />
 
-			{tradeColumns && (
+			{poolId && (
 				<div className="trades">
 					<h4>Recent Trades</h4>
 
-					<DataTable
-						columns={tradeColumns}
-						data={trades}
-						rowKey={(_, index) => index}
-						tableClassName="trades-table"
-					/>
+					{recentTrades.length > 0 ? (
+						<>
+							<div
+								className={cn(
+									"trades-wrapper",
+									hasMoreTrades && !showAllTrades && "is-collapsed",
+								)}
+							>
+								<DataTable
+									columns={tradeColumns}
+									data={visibleTrades}
+									rowKey={(_, index) => index}
+									tableClassName="trades-table"
+								/>
+							</div>
+
+							{hasMoreTrades && (
+								<button
+									type="button"
+									className="trades-toggle"
+									onClick={() => setShowAllTrades((v) => !v)}
+								>
+									{showAllTrades
+										? "Show less"
+										: `Show ${recentTrades.length - COLLAPSED_TRADES} more`}
+									<ChevronDown
+										size={16}
+										className={cn("chevron", showAllTrades && "is-open")}
+									/>
+								</button>
+							)}
+						</>
+					) : (
+						<p className="no-trades">Loading recent trades…</p>
+					)}
 				</div>
 			)}
 		</section>
