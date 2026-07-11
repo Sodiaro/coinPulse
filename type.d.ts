@@ -325,6 +325,25 @@ interface NftCollection {
 	volume_24h: { usd: number };
 }
 
+interface NftDetails {
+	id: string;
+	name: string;
+	symbol: string;
+	image: { small: string; small_2x?: string };
+	banner_image?: string;
+	description: string;
+	native_currency_symbol: string;
+	market_cap_rank: number | null;
+	floor_price: { native_currency: number; usd: number };
+	floor_price_in_usd_24h_percentage_change: number;
+	market_cap: { usd: number };
+	volume_24h: { usd: number };
+	one_day_sales: number;
+	number_of_unique_addresses: number;
+	total_supply: number;
+	links: { homepage?: string; twitter?: string; discord?: string };
+}
+
 interface UseCoinGeckoWebSocketProps {
 	coinId: string;
 	poolId: string;

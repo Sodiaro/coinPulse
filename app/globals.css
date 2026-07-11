@@ -635,6 +635,88 @@
     }
   }
 
+  #nft-details-page {
+    @apply py-12 px-4 sm:px-6 mx-auto max-w-360 w-full space-y-6;
+
+    .nft-hero {
+      @apply bg-dark-500 rounded-2xl border border-purple-600/20 overflow-hidden;
+
+      .nft-hero-banner {
+        @apply relative h-40 md:h-52 w-full bg-gradient-to-br from-purple-600/40 to-dark-700;
+
+        .banner-img {
+          @apply object-cover;
+        }
+
+        .banner-overlay {
+          @apply absolute inset-0 bg-gradient-to-t from-dark-500 via-dark-500/30 to-transparent;
+        }
+
+        .nft-hero-rank {
+          @apply absolute top-3 right-3 rounded-md bg-black/55 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm;
+        }
+
+        .nft-hero-avatar {
+          @apply absolute -bottom-8 left-6 size-20 rounded-2xl object-cover bg-dark-700 ring-4 ring-dark-500;
+        }
+      }
+
+      .nft-hero-body {
+        @apply p-6 pt-12 md:p-8 md:pt-12;
+      }
+
+      .nft-hero-head {
+        @apply flex flex-col md:flex-row md:items-center gap-4 md:gap-6;
+
+        .nft-hero-title {
+          @apply min-w-0 md:flex-1;
+        }
+
+        .name-row {
+          @apply flex items-center gap-3 flex-wrap;
+
+          h1 {
+            @apply text-2xl md:text-3xl font-semibold text-white;
+          }
+
+          .floor-change {
+            @apply text-sm font-medium;
+          }
+        }
+
+        .sub {
+          @apply text-sm uppercase text-purple-100/50 mt-1;
+        }
+
+        .nft-links {
+          @apply flex flex-wrap gap-2;
+
+          .nft-link {
+            @apply inline-flex items-center gap-1 rounded-lg border border-purple-600/20 bg-dark-400/50 px-3.5 py-2 text-sm font-medium text-purple-100 hover:text-white hover:border-purple-100/30 transition-colors;
+          }
+        }
+      }
+
+      .nft-hero-stats {
+        @apply mt-6 pt-6 border-t border-purple-100/10 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-x-4 gap-y-5;
+
+        li {
+          .label {
+            @apply text-xs uppercase tracking-wide text-purple-100/50 mb-1.5;
+          }
+
+          .value {
+            @apply text-lg font-semibold text-white;
+          }
+
+          .sub {
+            @apply text-xs text-purple-100/60 mt-0.5;
+          }
+        }
+      }
+    }
+  }
+
   #categories-fallback {
     @apply pt-8 mt-5 w-full bg-dark-500 rounded-xl overflow-hidden;
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
 	cn,
 	formatCompactCurrency,
@@ -20,12 +21,7 @@ const NftCard = ({
 	const avatar = collection.image.small_2x || collection.image.small;
 
 	return (
-		<a
-			href={`https://www.coingecko.com/en/nft/${collection.web_slug}`}
-			target="_blank"
-			rel="noopener noreferrer"
-			className="nft-card"
-		>
+		<Link href={`/nfts/${collection.id}`} className="nft-card">
 			<div className="nft-banner">
 				{collection.banner_image && (
 					<Image
@@ -95,7 +91,7 @@ const NftCard = ({
 					</div>
 				</div>
 			</div>
-		</a>
+		</Link>
 	);
 };
 
