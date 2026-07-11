@@ -1,6 +1,7 @@
 "use server";
 
 import qs from "query-string";
+import { NFT_COLLECTION_IDS } from "@/constants";
 
 const BASE_URL = process.env.COINGECKO_BASE_URL;
 const API_KEY = process.env.COINGECKO_API_KEY;
@@ -100,6 +101,23 @@ export async function searchCoins(query: string): Promise<SearchCoin[]> {
 		console.error("Error searching coins:", error);
 		return [];
 	}
+}
+
+export async function getNftCollections(): Promise<NftCollection[]> {
+	const results = await Promise.all(
+		NFT_COLLECTION_IDS.map(async (id) => {
+			try {
+				return await fetcher<NftCollection>(`/nfts/${id}`, undefined, 300);
+			} catch (error) {
+				console.error(`Error fetching NFT collection "${id}":`, error);
+				return null;
+			}
+		}),
+	);
+
+	return results
+		.filter((c): c is NftCollection => c !== null)
+		.sort((a, b) => (b.market_cap?.usd ?? 0) - (a.market_cap?.usd ?? 0));
 }
 
 export async function getGlobalData(): Promise<GlobalData | null> {

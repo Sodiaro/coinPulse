@@ -23,6 +23,27 @@ export const navItems = [
 		label: "All Coins",
 		href: "/coins",
 	},
+	{
+		label: "NFTs",
+		href: "/nfts",
+	},
+];
+
+// The paid /nfts/markets ranking endpoint is Pro-only, so the NFT page fetches a
+// curated set of well-known collections individually via /nfts/{id} (all free).
+export const NFT_COLLECTION_IDS = [
+	"cryptopunks",
+	"bored-ape-yacht-club",
+	"pudgy-penguins",
+	"mutant-ape-yacht-club",
+	"milady-maker",
+	"azuki",
+	"moonbirds",
+	"doodles-official",
+	"meebits",
+	"bored-ape-kennel-club",
+	"degods",
+	"otherdeed-for-otherside",
 ];
 
 const CHART_COLORS = {

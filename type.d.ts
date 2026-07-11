@@ -256,6 +256,20 @@ interface GlobalData {
 	volume_change_percentage_24h_usd: number;
 }
 
+interface NftCollection {
+	id: string;
+	web_slug: string;
+	name: string;
+	symbol: string;
+	image: { small: string; small_2x?: string };
+	banner_image?: string;
+	native_currency_symbol: string;
+	floor_price: { native_currency: number; usd: number };
+	floor_price_in_usd_24h_percentage_change: number;
+	market_cap: { usd: number };
+	volume_24h: { usd: number };
+}
+
 interface UseCoinGeckoWebSocketProps {
 	coinId: string;
 	poolId: string;
