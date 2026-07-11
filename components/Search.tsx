@@ -21,16 +21,28 @@ const Search = () => {
 	const [open, setOpen] = useState(false);
 	const [query, setQuery] = useState("");
 	const [results, setResults] = useState<SearchCoin[]>([]);
+	const [resultsQuery, setResultsQuery] = useState("");
 	const [trending, setTrending] = useState<TrendingCoin[]>([]);
-	const [loading, setLoading] = useState(false);
 	const [activeIndex, setActiveIndex] = useState(0);
 
 	const trimmed = query.trim();
+
+	// Derived rather than stored, so the debounced effect never calls setState
+	// synchronously. True while a query has no matching results loaded yet.
+	const loading = trimmed.length > 0 && resultsQuery !== trimmed;
 
 	const items: SearchItemCoin[] = useMemo(
 		() => (trimmed ? results : trending.map((t) => t.item)),
 		[trimmed, results, trending],
 	);
+
+	// Reset the highlight when the visible list changes, adjusted during render
+	// (the React-recommended alternative to a setState-in-effect).
+	const [prevItems, setPrevItems] = useState(items);
+	if (prevItems !== items) {
+		setPrevItems(items);
+		setActiveIndex(0);
+	}
 
 	// Show placeholder rows while a query is in flight, or while the default
 	// trending suggestions are still loading on first open.
@@ -40,6 +52,7 @@ const Search = () => {
 		setOpen(false);
 		setQuery("");
 		setResults([]);
+		setResultsQuery("");
 		setActiveIndex(0);
 	}, []);
 
@@ -70,26 +83,24 @@ const Search = () => {
 		};
 	}, [open]);
 
-	// Debounced search as the user types.
+	// Debounced search as the user types. All state updates happen inside the
+	// async callback, so the effect never calls setState synchronously.
 	useEffect(() => {
-		if (!trimmed) {
-			setResults([]);
-			setLoading(false);
-			return;
-		}
+		if (!trimmed) return;
 
-		setLoading(true);
+		let active = true;
 		const timer = setTimeout(async () => {
 			const coins = await searchCoins(trimmed);
+			if (!active) return;
 			setResults(coins);
-			setLoading(false);
+			setResultsQuery(trimmed);
 		}, 300);
 
-		return () => clearTimeout(timer);
+		return () => {
+			active = false;
+			clearTimeout(timer);
+		};
 	}, [trimmed]);
-
-	// Reset highlight whenever the visible list changes.
-	useEffect(() => setActiveIndex(0), [items]);
 
 	// Keep the highlighted row scrolled into view.
 	useEffect(() => {

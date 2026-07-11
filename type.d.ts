@@ -37,13 +37,7 @@ interface Ticker {
 }
 
 type Period =
-	| "daily"
-	| "weekly"
-	| "monthly"
-	| "3months"
-	| "6months"
-	| "yearly"
-	| "max";
+	"daily" | "weekly" | "monthly" | "3months" | "6months" | "yearly" | "max";
 
 interface CoinMarketData {
 	id: string;

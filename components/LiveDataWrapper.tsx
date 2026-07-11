@@ -13,7 +13,6 @@ import CoinHeader from "@/components/CoinHeader";
 const COLLAPSED_TRADES = 5;
 
 const LiveDataWrapper = ({
-	children,
 	coinId,
 	poolId,
 	coin,

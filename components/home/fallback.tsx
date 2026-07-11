@@ -1,6 +1,7 @@
 import React from "react";
 import DataTable from "@/components/DataTable";
-import { cn } from "@/lib/utils";
+
+type SkeletonRow = { id: number };
 
 export const CoinOverviewFallback = () => {
 	return (
@@ -45,15 +46,17 @@ export const TrendingCoinsFallback = () => {
 		},
 	];
 
-	const dummyData = Array.from({ length: 6 }, (_, i) => ({ id: i }));
+	const dummyData: SkeletonRow[] = Array.from({ length: 6 }, (_, i) => ({
+		id: i,
+	}));
 
 	return (
 		<div id="trending-coins-fallback">
 			<h4>Trending Coins</h4>
 			<DataTable
 				data={dummyData}
-				columns={columns as any}
-				rowKey={(item: any) => item.id}
+				columns={columns as DataTableColumn<SkeletonRow>[]}
+				rowKey={(item) => item.id}
 				tableClassName="trending-coins-table"
 			/>
 		</div>
@@ -100,15 +103,17 @@ export const CategoriesFallback = () => {
 		},
 	];
 
-	const dummyData = Array.from({ length: 10 }, (_, i) => ({ id: i }));
+	const dummyData: SkeletonRow[] = Array.from({ length: 10 }, (_, i) => ({
+		id: i,
+	}));
 
 	return (
 		<div id="categories-fallback">
 			<h4>Top Categories</h4>
 			<DataTable
 				data={dummyData}
-				columns={columns as any}
-				rowKey={(item: any) => item.id}
+				columns={columns as DataTableColumn<SkeletonRow>[]}
+				rowKey={(item) => item.id}
 				tableClassName="mt-3"
 			/>
 		</div>

@@ -103,6 +103,9 @@ const CandlestickChart = ({
 			chartRef.current = null;
 			candleSeriesRef.current = null;
 		};
+		// Chart is (re)created only on size/period change; the effect below keeps
+		// its data in sync, so `ohlcData` is intentionally excluded here.
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [height, period]);
 
 	useEffect(() => {
