@@ -176,33 +176,49 @@
   }
 
   header {
-    @apply border-b border-dark-400 h-20;
+    @apply relative border-b border-dark-400 h-20;
 
     .inner {
-      @apply flex justify-between items-center h-full;
+      @apply flex justify-between items-center h-full gap-3;
 
       a {
         @apply mb-0;
       }
 
       .logo {
-        @apply text-2xl font-bold tracking-tight text-white;
+        @apply text-2xl font-bold tracking-tight text-white shrink-0;
       }
 
-      nav {
-        @apply flex h-full items-center;
+      .header-right {
+        @apply flex items-center gap-2;
+      }
+
+      .desktop-nav {
+        @apply hidden md:flex h-full items-center;
 
         .nav-link {
-          @apply px-6 py-5 flex items-center transition-all hover:text-white font-medium h-full text-purple-100 cursor-pointer;
+          @apply px-4 lg:px-6 py-5 flex items-center transition-all hover:text-white font-medium h-full text-purple-100 cursor-pointer;
         }
 
         .nav-link.is-active {
           @apply text-white;
         }
+      }
 
-        .nav-link.is-home {
-          @apply max-sm:hidden;
-        }
+      .menu-toggle {
+        @apply md:hidden grid place-items-center p-2 rounded-md text-purple-100 hover:text-white transition-colors cursor-pointer;
+      }
+    }
+
+    .mobile-nav {
+      @apply md:hidden absolute top-full inset-x-0 z-40 flex flex-col bg-dark-700 border-b border-dark-400 py-2 shadow-xl;
+
+      .mobile-nav-link {
+        @apply px-6 py-3 font-medium text-purple-100 transition-colors hover:text-white hover:bg-dark-500;
+      }
+
+      .mobile-nav-link.is-active {
+        @apply text-white bg-dark-500;
       }
     }
   }
@@ -1015,7 +1031,8 @@
     }
   }
 
-  #coins-page {
+  #coins-page,
+  #watchlist-page {
     @apply py-12 px-4 sm:px-6 mx-auto max-w-360 size-full items-center gap-10 justify-center;
 
     .content {
@@ -1025,45 +1042,79 @@
     h4 {
       @apply text-2xl;
     }
+  }
 
-    .coins-table {
-      @apply bg-dark-500 rounded-xl max-h-fit overflow-hidden;
+  #watchlist-page {
+    .watchlist-message {
+      @apply py-16 text-center text-sm text-purple-100/60;
+    }
 
-      .rank-cell {
-        @apply pl-5 max-w-20! py-5 font-medium text-purple-100;
+    .watchlist-empty {
+      @apply flex flex-col items-center justify-center gap-2 rounded-xl bg-dark-500 py-16 text-center;
 
-        a {
-          @apply absolute inset-0 z-10;
+      .title {
+        @apply text-lg font-semibold text-white;
+      }
+
+      .sub {
+        @apply text-sm text-purple-100/60;
+      }
+
+      .browse-link {
+        @apply mt-3 rounded-lg bg-purple-600/30 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-600/50;
+      }
+    }
+  }
+
+  .coins-table {
+    @apply bg-dark-500 rounded-xl max-h-fit overflow-hidden;
+
+    .rank-cell {
+      @apply pl-5 max-w-20! py-5 font-medium text-purple-100;
+
+      a {
+        @apply absolute inset-0 z-10;
+      }
+    }
+
+    .token-cell {
+      @apply py-3 font-semibold;
+
+      .token-info {
+        @apply flex items-center gap-3;
+
+        p {
+          @apply max-w-full truncate;
         }
       }
+    }
 
-      .token-cell {
-        @apply py-3 font-semibold;
+    .price-cell {
+      @apply py-4 font-medium;
+    }
 
-        .token-info {
-          @apply flex items-center gap-3;
+    .change-cell {
+      @apply font-medium;
+    }
 
-          p {
-            @apply max-w-full truncate;
-          }
-        }
-      }
+    .change-value {
+      @apply flex gap-1 items-center font-medium;
+    }
 
-      .price-cell {
-        @apply py-4 font-medium;
-      }
+    .market-cap-cell {
+      @apply font-medium;
+    }
 
-      .change-cell {
-        @apply font-medium;
-      }
+    .star-cell {
+      @apply pr-5 text-right;
+    }
+  }
 
-      .change-value {
-        @apply flex gap-1 items-center font-medium;
-      }
+  .watchlist-btn {
+    @apply relative z-20 inline-grid place-items-center rounded-md p-1.5 text-purple-100/40 transition-colors cursor-pointer hover:text-yellow-500;
 
-      .market-cap-cell {
-        @apply pr-5 font-medium;
-      }
+    &.is-active {
+      @apply text-yellow-500;
     }
   }
 

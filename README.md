@@ -9,6 +9,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)
 ![CoinGecko](https://img.shields.io/badge/Data-CoinGecko-8DC647?logo=coingecko&logoColor=white)
+[![CI](https://github.com/Sodiaro/CryptoPulse/actions/workflows/ci.yml/badge.svg)](https://github.com/Sodiaro/CryptoPulse/actions/workflows/ci.yml)
 
 ### [🔗 Live Demo →](https://cryptopulsehq.vercel.app/)
 
@@ -148,6 +149,7 @@ Live on [Vercel](https://cryptopulsehq.vercel.app/). To deploy your own: import 
 | `npm run build` | Production build                  |
 | `npm run start` | Serve the production build        |
 | `npm run lint`  | Run ESLint                        |
+| `npm run test`  | Run the Vitest unit tests         |
 
 ## 📄 License
 

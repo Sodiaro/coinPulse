@@ -103,6 +103,25 @@ export async function searchCoins(query: string): Promise<SearchCoin[]> {
 	}
 }
 
+export async function getMarketsByIds(
+	ids: string[],
+): Promise<CoinMarketData[]> {
+	if (ids.length === 0) return [];
+
+	try {
+		return await fetcher<CoinMarketData[]>("/coins/markets", {
+			vs_currency: "usd",
+			ids: ids.join(","),
+			order: "market_cap_desc",
+			sparkline: "false",
+			price_change_percentage: "24h",
+		});
+	} catch (error) {
+		console.error("Error fetching watchlist markets:", error);
+		return [];
+	}
+}
+
 export async function getNftCollections(): Promise<NftCollection[]> {
 	const results = await Promise.all(
 		NFT_COLLECTION_IDS.map(async (id) => {

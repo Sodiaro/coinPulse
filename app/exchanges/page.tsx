@@ -80,12 +80,14 @@ const Exchanges = async ({ searchParams }: NextPageProps) => {
 		},
 		{
 			header: "Country",
-			cellClassName: "country-cell",
+			headClassName: "max-sm:hidden",
+			cellClassName: "country-cell max-sm:hidden",
 			cell: (exchange) => exchange.country || "—",
 		},
 		{
 			header: "Established",
-			cellClassName: "year-cell",
+			headClassName: "max-sm:hidden",
+			cellClassName: "year-cell max-sm:hidden",
 			cell: (exchange) => exchange.year_established ?? "—",
 		},
 	];

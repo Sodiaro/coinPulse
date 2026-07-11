@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn, formatPercentage, formatCurrency } from "@/lib/utils";
 import DataTable from "@/components/DataTable";
 import CoinsPagination from "@/components/CoinsPagination";
+import WatchlistButton from "@/components/WatchlistButton";
 
 const Coins = async ({ searchParams }: NextPageProps) => {
 	const { page } = await searchParams;
@@ -70,8 +71,14 @@ const Coins = async ({ searchParams }: NextPageProps) => {
 		},
 		{
 			header: "Market Cap",
-			cellClassName: "market-cap-cell",
+			headClassName: "max-sm:hidden",
+			cellClassName: "market-cap-cell max-sm:hidden",
 			cell: (coin) => formatCurrency(coin.market_cap),
+		},
+		{
+			header: "",
+			cellClassName: "star-cell",
+			cell: (coin) => <WatchlistButton coinId={coin.id} />,
 		},
 	];
 

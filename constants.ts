@@ -24,6 +24,10 @@ export const navItems = [
 		href: "/coins",
 	},
 	{
+		label: "Watchlist",
+		href: "/watchlist",
+	},
+	{
 		label: "NFTs",
 		href: "/nfts",
 	},
