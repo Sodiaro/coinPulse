@@ -36,8 +36,7 @@ interface Ticker {
 	trade_url: string;
 }
 
-type Period =
-	"daily" | "weekly" | "monthly" | "3months" | "6months" | "yearly" | "max";
+type Period = "daily" | "weekly" | "monthly" | "3months" | "6months" | "yearly";
 
 interface CoinMarketData {
 	id: string;
@@ -247,6 +246,16 @@ interface Category {
 	volume_24h: number;
 }
 
+interface GlobalData {
+	active_cryptocurrencies: number;
+	markets: number;
+	total_market_cap: { usd: number };
+	total_volume: { usd: number };
+	market_cap_percentage: { btc: number; eth: number };
+	market_cap_change_percentage_24h_usd: number;
+	volume_change_percentage_24h_usd: number;
+}
+
 interface UseCoinGeckoWebSocketProps {
 	coinId: string;
 	poolId: string;
@@ -304,8 +313,14 @@ interface SearchItemProps {
 	isActiveName: boolean;
 }
 
+interface CoinGeckoErrorStatus {
+	error_code?: number;
+	error_message?: string;
+}
+
 interface CoinGeckoErrorBody {
-	error?: string;
+	error?: string | { status?: CoinGeckoErrorStatus };
+	status?: CoinGeckoErrorStatus;
 }
 
 type QueryParams = Record<string, string | number | boolean | undefined>;

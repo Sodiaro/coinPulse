@@ -475,6 +475,38 @@
     }
   }
 
+  #market-stats {
+    @apply grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6;
+
+    .stat-card {
+      @apply bg-dark-500 rounded-xl p-4 md:p-5 border border-purple-600/20;
+    }
+
+    .stat-label {
+      @apply text-sm text-purple-100/70 mb-2;
+    }
+
+    .stat-value-row {
+      @apply flex items-center gap-2 flex-wrap;
+    }
+
+    .stat-value {
+      @apply text-xl md:text-2xl font-semibold text-white;
+    }
+
+    .stat-change {
+      @apply flex items-center gap-0.5 text-xs md:text-sm font-medium;
+    }
+
+    .stat-skel-label {
+      @apply h-3 w-20 rounded mb-3;
+    }
+
+    .stat-skel-value {
+      @apply h-7 w-28 rounded;
+    }
+  }
+
   .home-grid {
     @apply grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-start lg:items-center gap-6;
   }

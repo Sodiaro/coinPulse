@@ -3,6 +3,19 @@ import DataTable from "@/components/DataTable";
 
 type SkeletonRow = { id: number };
 
+export const MarketStatsFallback = () => {
+	return (
+		<div id="market-stats">
+			{Array.from({ length: 4 }, (_, i) => (
+				<div className="stat-card" key={i}>
+					<div className="stat-skel-label skeleton" />
+					<div className="stat-skel-value skeleton" />
+				</div>
+			))}
+		</div>
+	);
+};
+
 export const CoinOverviewFallback = () => {
 	return (
 		<div id="coin-overview-fallback">

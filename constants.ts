@@ -98,14 +98,14 @@ export const getChartConfig = (
 
 // `interval` is a paid-plan parameter; the Demo plan rejects it with a 400 and
 // picks granularity from `days` instead (30m up to 2d, 4h up to 30d, 4d beyond).
-export const PERIOD_CONFIG: Record<Period, { days: number | string }> = {
+// `days=max` is also paid-only (free tier is capped at 365 days), so 1Y is the max.
+export const PERIOD_CONFIG: Record<Period, { days: number }> = {
 	daily: { days: 1 },
 	weekly: { days: 7 },
 	monthly: { days: 30 },
 	"3months": { days: 90 },
 	"6months": { days: 180 },
 	yearly: { days: 365 },
-	max: { days: "max" },
 };
 
 export const PERIOD_BUTTONS: { value: Period; label: string }[] = [
@@ -115,7 +115,6 @@ export const PERIOD_BUTTONS: { value: Period; label: string }[] = [
 	{ value: "3months", label: "3M" },
 	{ value: "6months", label: "6M" },
 	{ value: "yearly", label: "1Y" },
-	{ value: "max", label: "Max" },
 ];
 
 export const LIVE_INTERVAL_BUTTONS: { value: "1s" | "1m"; label: string }[] = [

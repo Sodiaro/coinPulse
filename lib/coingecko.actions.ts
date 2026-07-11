@@ -34,9 +34,16 @@ export async function fetcher<T>(
 			.json()
 			.catch(() => ({}));
 
-		throw new Error(
-			`API Error: ${response.status}: ${errorBody.error || response.statusText} `,
-		);
+		// CoinGecko returns several error shapes: { error: "msg" },
+		// { status: { error_message } }, or { error: { status: { error_message } } }.
+		const message =
+			errorBody.status?.error_message ||
+			(typeof errorBody.error === "string"
+				? errorBody.error
+				: errorBody.error?.status?.error_message) ||
+			response.statusText;
+
+		throw new Error(`API Error: ${response.status}: ${message}`);
 	}
 
 	return response.json();
@@ -92,6 +99,21 @@ export async function searchCoins(query: string): Promise<SearchCoin[]> {
 	} catch (error) {
 		console.error("Error searching coins:", error);
 		return [];
+	}
+}
+
+export async function getGlobalData(): Promise<GlobalData | null> {
+	try {
+		const { data } = await fetcher<{ data: GlobalData }>(
+			"/global",
+			undefined,
+			120,
+		);
+
+		return data ?? null;
+	} catch (error) {
+		console.error("Error fetching global data:", error);
+		return null;
 	}
 }
 
