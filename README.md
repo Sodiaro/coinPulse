@@ -10,29 +10,37 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)
 ![CoinGecko](https://img.shields.io/badge/Data-CoinGecko-8DC647?logo=coingecko&logoColor=white)
 
+### [🔗 Live Demo →](https://cryptopulsehq.vercel.app/)
+
 ![CryptoPulse dashboard](docs/home.png)
 
 </div>
 
 ## About
 
-CryptoPulse is a crypto market dashboard that tracks live prices, trending coins, market categories, and per-coin analytics. I built it as a portfolio project to demonstrate production-grade **Next.js App Router** work — streaming server components, Server Actions, third-party API integration on a rate-limited free tier, and a polished, responsive dark UI.
+CryptoPulse is a crypto market dashboard that tracks live prices, trending coins, market categories, NFT collections, exchanges, and per-coin analytics. I built it as a portfolio project to demonstrate production-grade **Next.js App Router** work — streaming server components, Server Actions, third-party API integration on a rate-limited free tier, and a polished, responsive dark UI.
 
 It runs entirely on CoinGecko's free **Demo** plan, with graceful fallbacks so nothing breaks when the API is slow or a data point is missing.
 
 ## ✨ Features
 
-- **Home dashboard** — a Bitcoin candlestick overview, live trending coins, and top market categories, each streamed independently with React `Suspense` and skeleton fallbacks.
+- **Home dashboard** — a global market-stats header (total market cap, 24h volume, BTC dominance, active coins), a Bitcoin candlestick overview, live trending coins, and top market categories — each streamed independently with React `Suspense` and skeleton fallbacks.
 - **All Coins** — a paginated market table ranked by market cap, with price and 24h change.
-- **Coin detail pages** — an interactive candlestick chart with selectable periods (1D → Max), a live-updating price header, a currency converter, key stats, official links, and an expandable **Recent Trades** feed sourced from on-chain DEX data.
+- **Coin detail pages** — an interactive candlestick chart with selectable periods (1D → 1Y), a live-updating price header, a currency converter, a market-stats grid (ATH/ATL, 24h high/low, supply, FDV), an About section, official links, and an expandable **Recent Trades** feed sourced from on-chain DEX data.
+- **NFT explorer** — a gallery of notable collections with banners, floor prices, and 24h stats, plus a per-collection detail page (floor, market cap, volume, sales, owners, supply).
+- **Exchanges** — a ranked, paginated table by trust score & 24h volume, plus a per-exchange detail page with key stats and its top trading pairs.
 - **Instant search** — a command-palette-style modal with debounced queries, trending suggestions, full keyboard navigation, and rich result rows.
 - **Free-tier resilient** — uses the Demo host/headers, avoids paid-only parameters, and substitutes REST polling where the paid WebSocket feed would normally be used.
 
 ## 📸 Screenshots
 
-|                     Coin details                     |                    All coins                     |
-| :--------------------------------------------------: | :----------------------------------------------: |
-| ![Coin details page](docs/coin-details.png)          | ![All coins page](docs/coins.png)                |
+|             Coin details              |          NFT explorer           |
+| :-----------------------------------: | :-----------------------------: |
+| ![Coin details](docs/coin-details.png) | ![NFT explorer](docs/nfts.png) |
+
+|              Exchanges               |             All coins              |
+| :----------------------------------: | :--------------------------------: |
+| ![Exchanges](docs/exchanges.png)     | ![All coins](docs/coins.png)       |
 
 ## 🛠️ Tech Stack
 
@@ -56,7 +64,7 @@ It runs entirely on CoinGecko's free **Demo** plan, with graceful fallbacks so n
 
 ```bash
 # 1. Clone
-git clone https://github.com/<your-username>/CryptoPulse.git
+git clone https://github.com/Sodiaro/CryptoPulse.git
 cd CryptoPulse
 
 # 2. Install
@@ -96,15 +104,20 @@ NEXT_PUBLIC_ENABLE_LIVE_DATA=false
 app/
   page.tsx              # Home dashboard (streamed sections)
   coins/                # All Coins list + [id] detail pages
+  nfts/                 # NFT explorer + [id] collection detail
+  exchanges/            # Exchanges list + [id] detail (with trading pairs)
   layout.tsx            # Root layout, header, fonts, metadata
   icon.svg              # Bitcoin favicon
 components/
-  home/                 # CoinOverview, TrendingCoins, Categories, fallbacks
+  home/                 # MarketStats, CoinOverview, TrendingCoins, Categories, fallbacks
   Search.tsx            # Search modal
   CandlestickChart.tsx  # lightweight-charts wrapper
   LiveDataWrapper.tsx   # Live header, chart, recent trades
   Converter.tsx         # Currency converter
   DataTable.tsx         # Generic table
+  CoinsPagination.tsx   # Path-aware pagination
+  NftCard.tsx           # NFT collection card
+  ReadMore.tsx          # Clamp/expand for descriptions
   ui/                   # shadcn/ui primitives
 hooks/                  # useCoinGeckoWebSocket (live feed, paid tier)
 lib/
@@ -123,6 +136,10 @@ A few decisions worth calling out:
 - **Hydration-safe formatting.** Currency is formatted with a pinned `en-US` locale to avoid server/client mismatches (the server defaulted to `en-GB`, rendering `US$` vs `$`).
 - **Free-plan aware.** The paid live WebSocket is gated behind a feature flag; recent trades fall back to polling the on-chain REST endpoint so the feature still works on the Demo tier.
 
+## ▲ Deployment
+
+Live on [Vercel](https://cryptopulsehq.vercel.app/). To deploy your own: import the repo on Vercel, add the two `COINGECKO_*` environment variables, and deploy — it builds with zero extra config.
+
 ## 📦 Scripts
 
 | Command         | Description                       |
@@ -139,5 +156,5 @@ MIT — free to use, learn from, and build on.
 ---
 
 <div align="center">
-Built by <a href="https://github.com/">Sodiq Semiu</a> · Data by <a href="https://www.coingecko.com/en/api">CoinGecko</a>
+Built by <a href="https://github.com/Sodiaro">Sodiq Semiu</a> · Data by <a href="https://www.coingecko.com/en/api">CoinGecko</a>
 </div>
