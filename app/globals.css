@@ -849,6 +849,87 @@
         }
       }
     }
+
+    .market-stats-section {
+      @apply w-full mt-4 lg:col-span-2 xl:col-span-3;
+
+      h4 {
+        @apply text-xl md:text-2xl font-semibold mb-4;
+      }
+
+      .coin-stats-grid {
+        @apply grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4;
+
+        li {
+          @apply bg-dark-500 rounded-lg px-4 py-4 sm:px-5 sm:py-5 border border-purple-600/20;
+
+          .label {
+            @apply text-xs sm:text-sm text-purple-100/70 mb-2;
+          }
+
+          .value {
+            @apply text-base sm:text-lg font-semibold text-white;
+          }
+
+          .sub {
+            @apply flex items-center gap-2 mt-1.5 text-xs font-medium;
+
+            .date {
+              @apply text-purple-100/50;
+            }
+          }
+        }
+      }
+    }
+
+    .about-section {
+      @apply w-full mt-4 lg:col-span-2 xl:col-span-3;
+
+      .about-card {
+        @apply bg-dark-500 rounded-2xl border border-purple-600/20 p-6 md:p-8;
+      }
+
+      .about-head {
+        @apply flex items-center gap-3 mb-5 pb-5 border-b border-purple-100/10;
+
+        .about-icon {
+          @apply rounded-full;
+        }
+
+        h4 {
+          @apply text-lg md:text-xl font-semibold text-white;
+        }
+      }
+
+      .about-text-wrap {
+        @apply relative;
+
+        &.is-clamped {
+          @apply max-h-[3.75rem] overflow-hidden;
+        }
+
+        .about-fade {
+          @apply pointer-events-none absolute inset-x-0 bottom-0 h-9;
+          background: linear-gradient(to bottom, transparent, var(--dark-500));
+        }
+      }
+
+      .about-text {
+        @apply text-sm md:text-[15px] text-purple-100/75 leading-7 max-w-3xl;
+      }
+
+      .read-more-btn {
+        @apply mt-4 inline-flex items-center gap-1 text-sm font-medium text-green-500 hover:text-green-400 cursor-pointer transition-colors;
+
+        .chevron {
+          @apply transition-transform duration-200;
+        }
+
+        .chevron.is-open {
+          @apply rotate-180;
+        }
+      }
+    }
   }
 
   #coins-page {

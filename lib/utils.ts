@@ -46,6 +46,27 @@ export function formatCompactCurrency(
 	});
 }
 
+export function formatCompactNumber(value: number | null | undefined): string {
+	if (value === null || value === undefined || isNaN(value)) {
+		return "—";
+	}
+	return value.toLocaleString("en-US", {
+		notation: "compact",
+		maximumFractionDigits: 2,
+	});
+}
+
+export function formatDate(date: string | null | undefined): string {
+	if (!date) return "—";
+	const d = new Date(date);
+	if (isNaN(d.getTime())) return "—";
+	return d.toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});
+}
+
 export function formatPercentage(change: number | null | undefined): string {
 	if (change === null || change === undefined || isNaN(change)) {
 		return "0.0%";
