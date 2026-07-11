@@ -45,6 +45,15 @@ const Header = () => {
 					>
 						NFTs
 					</Link>
+
+					<Link
+						href="/exchanges"
+						className={cn("nav-link", {
+							"is-active": pathname === "/exchanges",
+						})}
+					>
+						Exchanges
+					</Link>
 				</nav>
 			</div>
 		</header>

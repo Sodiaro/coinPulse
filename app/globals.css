@@ -882,52 +882,53 @@
       }
     }
 
-    .about-section {
-      @apply w-full mt-4 lg:col-span-2 xl:col-span-3;
+  }
 
-      .about-card {
-        @apply bg-dark-500 rounded-2xl border border-purple-600/20 p-6 md:p-8;
+  .about-section {
+    @apply w-full mt-4 lg:col-span-2 xl:col-span-3;
+
+    .about-card {
+      @apply bg-dark-500 rounded-2xl border border-purple-600/20 p-6 md:p-8;
+    }
+
+    .about-head {
+      @apply flex items-center gap-3 mb-5 pb-5 border-b border-purple-100/10;
+
+      .about-icon {
+        @apply rounded-full;
       }
 
-      .about-head {
-        @apply flex items-center gap-3 mb-5 pb-5 border-b border-purple-100/10;
+      h4 {
+        @apply text-lg md:text-xl font-semibold text-white;
+      }
+    }
 
-        .about-icon {
-          @apply rounded-full;
-        }
+    .about-text-wrap {
+      @apply relative;
 
-        h4 {
-          @apply text-lg md:text-xl font-semibold text-white;
-        }
+      &.is-clamped {
+        @apply max-h-[3.75rem] overflow-hidden;
       }
 
-      .about-text-wrap {
-        @apply relative;
+      .about-fade {
+        @apply pointer-events-none absolute inset-x-0 bottom-0 h-9;
+        background: linear-gradient(to bottom, transparent, var(--dark-500));
+      }
+    }
 
-        &.is-clamped {
-          @apply max-h-[3.75rem] overflow-hidden;
-        }
+    .about-text {
+      @apply text-sm md:text-[15px] text-purple-100/75 leading-7 max-w-3xl;
+    }
 
-        .about-fade {
-          @apply pointer-events-none absolute inset-x-0 bottom-0 h-9;
-          background: linear-gradient(to bottom, transparent, var(--dark-500));
-        }
+    .read-more-btn {
+      @apply mt-4 inline-flex items-center gap-1 text-sm font-medium text-green-500 hover:text-green-400 cursor-pointer transition-colors;
+
+      .chevron {
+        @apply transition-transform duration-200;
       }
 
-      .about-text {
-        @apply text-sm md:text-[15px] text-purple-100/75 leading-7 max-w-3xl;
-      }
-
-      .read-more-btn {
-        @apply mt-4 inline-flex items-center gap-1 text-sm font-medium text-green-500 hover:text-green-400 cursor-pointer transition-colors;
-
-        .chevron {
-          @apply transition-transform duration-200;
-        }
-
-        .chevron.is-open {
-          @apply rotate-180;
-        }
+      .chevron.is-open {
+        @apply rotate-180;
       }
     }
   }
@@ -980,6 +981,151 @@
 
       .market-cap-cell {
         @apply pr-5 font-medium;
+      }
+    }
+  }
+
+  #exchanges-page {
+    @apply py-12 px-4 sm:px-6 mx-auto max-w-360 size-full items-center gap-10 justify-center;
+
+    .content {
+      @apply flex flex-col w-full space-y-5;
+    }
+
+    h4 {
+      @apply text-2xl;
+    }
+
+    .exchanges-table {
+      @apply bg-dark-500 rounded-xl max-h-fit overflow-hidden;
+
+      .rank-cell {
+        @apply pl-5 max-w-20! py-5 font-medium text-purple-100;
+
+        a {
+          @apply absolute inset-0 z-10;
+        }
+      }
+
+      .exchange-cell {
+        @apply py-3 font-semibold;
+
+        .exchange-info {
+          @apply flex items-center gap-3;
+
+          img {
+            @apply rounded-full;
+          }
+
+          p {
+            @apply max-w-full truncate;
+          }
+        }
+      }
+
+      .trust-badge {
+        @apply inline-flex rounded-md bg-dark-400 px-2.5 py-1 text-sm font-semibold;
+      }
+
+      .volume-cell {
+        @apply font-medium;
+      }
+
+      .country-cell,
+      .year-cell {
+        @apply text-purple-100 font-medium;
+      }
+
+      .year-cell {
+        @apply pr-5;
+      }
+    }
+  }
+
+  #exchange-details-page {
+    @apply py-12 px-4 sm:px-6 mx-auto max-w-360 w-full space-y-6;
+
+    .ex-hero {
+      @apply bg-dark-500 rounded-2xl border border-purple-600/20 p-6 md:p-8;
+    }
+
+    .ex-head {
+      @apply flex flex-col md:flex-row md:items-center gap-5;
+
+      .ex-logo {
+        @apply rounded-full bg-dark-700 shrink-0;
+      }
+
+      .ex-title {
+        @apply min-w-0 md:flex-1;
+      }
+
+      .ex-name-row {
+        @apply flex items-center gap-3 flex-wrap;
+
+        h1 {
+          @apply text-2xl md:text-3xl font-semibold text-white;
+        }
+
+        .trust-badge {
+          @apply rounded-md bg-dark-400 px-2.5 py-1 text-sm font-semibold;
+        }
+      }
+
+      .ex-sub {
+        @apply text-sm text-purple-100/60 mt-1.5;
+      }
+
+      .ex-links {
+        @apply flex flex-wrap gap-2;
+
+        .ex-link {
+          @apply inline-flex items-center gap-1 rounded-lg border border-purple-600/20 bg-dark-400/50 px-3.5 py-2 text-sm font-medium text-purple-100 hover:text-white hover:border-purple-100/30 transition-colors;
+        }
+      }
+    }
+
+    .ex-stats {
+      @apply mt-6 pt-6 border-t border-purple-100/10 grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-x-4 gap-y-5;
+
+      li {
+        .label {
+          @apply text-xs uppercase tracking-wide text-purple-100/50 mb-1.5;
+        }
+
+        .value {
+          @apply text-lg font-semibold text-white;
+        }
+      }
+    }
+
+    .ex-pairs {
+      @apply w-full space-y-4;
+
+      h4 {
+        @apply text-xl md:text-2xl font-semibold;
+      }
+
+      .pairs-table {
+        @apply bg-dark-500 rounded-xl overflow-hidden;
+
+        .pair-cell {
+          @apply pl-5 py-4 font-semibold;
+
+          a {
+            @apply absolute inset-0 z-10;
+          }
+        }
+
+        .price-cell,
+        .vol-cell,
+        .spread-cell {
+          @apply py-4 font-medium;
+        }
+
+        .spread-cell {
+          @apply pr-5 text-purple-100;
+        }
       }
     }
   }

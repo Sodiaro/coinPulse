@@ -8,7 +8,7 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { buildPageNumbers, cn, ELLIPSIS } from "@/lib/utils";
 
 const CoinsPagination = ({
@@ -17,9 +17,10 @@ const CoinsPagination = ({
 	hasMorePages,
 }: Pagination) => {
 	const router = useRouter();
+	const pathname = usePathname();
 
 	const handlePageChange = (page: number) => {
-		router.push(`/coins?page=${page}`);
+		router.push(`${pathname}?page=${page}`);
 	};
 
 	const pageNumbers = buildPageNumbers(currentPage, totalPages);

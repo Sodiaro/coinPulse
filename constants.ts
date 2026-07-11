@@ -27,6 +27,10 @@ export const navItems = [
 		label: "NFTs",
 		href: "/nfts",
 	},
+	{
+		label: "Exchanges",
+		href: "/exchanges",
+	},
 ];
 
 // The paid /nfts/markets ranking endpoint is Pro-only, so the NFT page fetches a

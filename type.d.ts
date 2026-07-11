@@ -268,6 +268,49 @@ interface GlobalData {
 	volume_change_percentage_24h_usd: number;
 }
 
+interface ExchangeData {
+	id: string;
+	name: string;
+	year_established: number | null;
+	country: string | null;
+	url: string;
+	image: string;
+	trust_score: number | null;
+	trust_score_rank: number | null;
+	trade_volume_24h_btc: number;
+}
+
+interface ExchangeTicker {
+	base: string;
+	target: string;
+	market: { name: string; identifier: string };
+	last: number;
+	converted_last: { usd: number };
+	converted_volume: { usd: number };
+	bid_ask_spread_percentage: number;
+	trade_url: string | null;
+}
+
+interface ExchangeDetails {
+	name: string;
+	year_established: number | null;
+	country: string | null;
+	description: string;
+	url: string;
+	image: string;
+	facebook_url?: string;
+	reddit_url?: string;
+	telegram_url?: string;
+	twitter_handle?: string;
+	centralized: boolean;
+	trust_score: number | null;
+	trust_score_rank: number | null;
+	coins: number;
+	pairs: number;
+	trade_volume_24h_btc: number;
+	tickers: ExchangeTicker[];
+}
+
 interface NftCollection {
 	id: string;
 	web_slug: string;
